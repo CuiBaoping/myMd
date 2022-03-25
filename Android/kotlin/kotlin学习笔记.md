@@ -1,3 +1,11 @@
+官网：[Kotlin Programming Language (kotlinlang.org)](https://kotlinlang.org/)
+
+文档：[Kotlin 官方文档 中文版 (kotlincn.net)](https://book.kotlincn.net/)
+
+在线模拟器：[Kotlin Playground (kotlinlang.org)](https://play.kotlinlang.org/)
+
+注意：代码在“在线模拟器”中运行
+
 # 一、隐式函数或者Lambda
 
 ~~~kotlin
@@ -43,11 +51,11 @@ val value = fun2("Kotlin", ::fun1, 88) //双冒号操作符 将一个函数当�
 
 # 三、Kotlin中 ?、!!、?:、:: 、->、== 符号的简单说明
 
-详见：[Kotlin中 ?、!!、?:、:: 、->、== 符号的简单说明](https://blog.csdn.net/Sindyue/article/details/99625012)
+参考：[Kotlin中 ?、!!、?:、:: 、->、== 符号的简单说明](https://blog.csdn.net/Sindyue/article/details/99625012)
 
 # 四、let、with、run、apply、also函数的使用
 
-详见：[Kotlin系列之let、with、run、apply、also函数的使用](https://blog.csdn.net/u013064109/article/details/78786646)
+参考：[Kotlin系列之let、with、run、apply、also函数的使用](https://blog.csdn.net/u013064109/article/details/78786646)
 
 # 五、生成随机数
 
@@ -55,7 +63,7 @@ val value = fun2("Kotlin", ::fun1, 88) //双冒号操作符 将一个函数当�
 // (0..1000).shuffled() 生成1001个0~1000的随机数
 val number1 = (0..1000).shuffled().first()   
 // Math.random()生成 0~1 之间的double型随机数
-val number2 = (Math.random()* 1000).toInt()
+val number2 = (Math.random() * 1000).toInt()
 ~~~
 
 # 六、主构造和次构造
@@ -76,7 +84,7 @@ class Class() {	//主构造
 
 # 七、Kotlin和Java相互调用规则
 
-## 1、Kotlin调用Java，需要显示规定类型
+## Kotlin调用Java，需要显示规定类型
 
 Kotlin调用Java时，默认为 "XXX!" ，会有崩溃隐患！
 
@@ -110,5 +118,42 @@ println("${info2s.length}")		//不会崩溃，打印"null"
 ~~~kotlin
 val int: Int = 255
 println("${int.toString(16)}")	// 输出FF
+~~~
+
+# toInt()注意
+
+~~~kotlin
+// Double.toInt()或者Float.toInt()大于0x7fffffff部分不会转换为负值
+val num1 = (Math.random() * 0x80000000 + 0x80000000).toInt()	// 错误
+println("${num1.toString(16)}")  // 只显示为7fffffff
+val num2 = (Math.random() * 0x80000000 + 0x80000000).otLong().toInt() // 正确
+println("${num2.toString(16)}")  // 0x80000000~0xFFFFFFFF会显示为负值
+
+~~~
+
+## object说明
+
+参考：[Android之Kotlin入门：object 与companion object的区别 - 简书 (jianshu.com)](https://www.jianshu.com/p/b4de1c94cb1d)
+
+# 八、泛型、可变参数、遍历
+
+~~~kotlin
+// <T> ：表示泛型，vararg：可变参数，X.forEach：遍历
+fun <T> appendString(tag: String, vararg otherInfo: T?) : String {
+    var str: String = "$tag:"
+    otherInfo.forEach {
+        str = "$str${it.toString()} "
+    }
+    return str
+}
+
+fun main() {
+	var str: String
+    str = appendString("消费日", 11.11, 12.12)
+    println(str)
+    
+    str = appendString("中国四大发明", "造纸术", "印刷术", "火药", "指南针")
+    println(str)
+}
 ~~~
 

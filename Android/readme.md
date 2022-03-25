@@ -4,6 +4,8 @@
 
 [Android Studio 官网](https://developer.android.google.cn/docs?authuser=0)
 
+学习网址：[示例工程地址]( https://gitee.com/rustfisher/AndroidTutorial)，[文档地址](https://an.rustfisher.com)
+
 # kotlin中的空指针
 
 ~~~kotlin
@@ -126,6 +128,11 @@ android:shadowColor="@color/myRed"
 ~~~
 
 ## 4、图片调用
+
+### 添加图片
+
+复制待添加图片文件，然后在项目中的待添加位置选择粘贴（注意：一般为.\src\res\drawable\位置）
+
 ~~~xml
 .\src\res\drawable\draw1.png
 .\src\res\drawable\draw2.jpg
@@ -176,8 +183,14 @@ vw.bringToFront() // 控件置顶 vm为控件
 ## 非主线程运行UI控件
 
 ```kotlin
-runOnUiThread{}		// UI控件函数需要在{}中
+runOnUiThread{ view.text="XXX" }		// UI控件函数需要在{}中
 ```
+
+~~~kotlin
+view.post{ view.text="XXX" }			// UI控件函数需要在{}中
+~~~
+
+
 
 ## 窗口(Activity)切换
 
@@ -203,6 +216,8 @@ tools:ignore="MissingConstraints"
 // Toast.LENGTH_SHORT 短时间提示
 // Toast.LENGTH_LONG 长时间提示
 Toast.makeText(this, "这是系统提示", Toast.LENGTH_SHORT).show()
+// 非主任务调用
+Toast.makeText(applicationContext, "这是系统提示", Toast.LENGTH_SHORT).show()
 ~~~
 
 # registerForActivityResult常规用法
@@ -228,7 +243,9 @@ Toast.makeText(this, "这是系统提示", Toast.LENGTH_SHORT).show()
 
 [字符串调用方法详见](#2，字符串调用)
 
-## 第一种：
+# 匿名函数的定义与调用
+
+## 普通匿名定义调用：
 
 定义：
 
@@ -273,7 +290,7 @@ myAdapter.onItemClickListener = object : OnRecyclerViewClickListener {
 }
 ~~~
 
-## 第二种
+## lambda定义调用
 
 定义：
 
@@ -470,5 +487,26 @@ Kotlin文件
 ~~~kotlin
 val iv = findViewById<ImageView>(R.id.iv)	// iv为ImageView控件
 iv.setColorFilter(R.color.red)
+~~~
+
+## XML文件中的 android、app与tools
+
+参考1：[xml中的android、app、tools你真的了解吗 - 简书 (jianshu.com)](https://www.jianshu.com/p/910685a8ea91)
+
+~~~xml
+<!-- 系统命名空间：调用系统属性 -->
+<Layout xmlns:android="http://schemas.android.com/apk/res/android" > </Layout>
+
+<!-- 自定义命名空间：使用包或者自定义属性 -->
+<Layout xmlns:app="http://schemas.android.com/apk/res-auto"> </Layout>
+
+<!-- 工具命令空间：仅IDE界面使用，APP运行时忽略。可和系统命名空间重叠 -->
+<Layout xmlns:tools="http://schemas.android.com/tools" > </Layout>
+
+<!-- 注意：3种命名可任意共存 -->
+<Layou xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools">
+</Layou>
 ~~~
 
