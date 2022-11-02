@@ -3,8 +3,9 @@
 [Git Bash参考网址](https://www.open-open.com/lib/view/open1414396787325.html)
 [GitHub Desktop官网](https://docs.github.com/cn/desktop)
 [使用GitHub Desktop管理GitLib](https://blog.csdn.net/towrabbit/article/details/95224578)
+[GitHbu国内加速](https://www.zhihu.com/question/38192507)
 
-# 下载并安装给git
+# 下载并安装git
 [下载地址](http://git-scm.com/downloads)
 1，安装：使用默认安装
 2，运行"Git Bash"
